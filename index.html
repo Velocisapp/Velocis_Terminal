@@ -76,7 +76,7 @@
     width: 100vw;
     height: 100vh;
     background-color: #000 !important;
-    z-index: -1; /* This pushes the 3D engine to the bottom layer */
+    z-index: 1; /* This pushes the 3D engine to the bottom layer */
     display: block !important; /* This forces it to exist */
     pointer-events: none;
 }
@@ -152,8 +152,7 @@
     img => { img.crossOrigin = 'anonymous'; }); 
 }
        function setup() {
-let canvas = createCanvas(windowWidth, windowHeight, WEBGL); canvas.position(0,0); canvas.style('z-index', '-1');
-   canvas.parent('globe-container'); // This is the secret key
+   let canvas = createCanvas(windowWidth, windowHeight, WEBGL); canvas.style('position', 'fixed'); canvas.style('top', '0'); canvas.style('left', '0');canvas.style('z-index', '1');
    perspective(PI/3.0, width/height, 0.1, 5000);
 }
        function draw() {
