@@ -125,9 +125,10 @@
         let currentMode = 'air', earthImg;
         function setMode(m, el) { currentMode = m; document.querySelectorAll('.icon-btn').forEach(b => b.classList.remove('active')); el.classList.add('active'); }
         function preload() { earthImg = loadImage('https://raw.githubusercontent.com/mrdoob/three.js/master/examples/textures/planets/earth_atmos_2048.jpg'); }
-        function setup() { createCanvas(windowWidth, windowHeight, WEBGL); }
-        function draw() { background(0); ambientLight(255); pointLight(255, 255, 255, 0, 0, 800); push(); rotateY(frameCount * 0.005); noStroke(); texture(earthImg); sphere(180); pop(); }
-
+        function setup() { 
+    createCanvas(windowWidth, windowHeight, WEBGL);
+ perspective(PI/3.0, width/height, 0.1, 5000);
+        }
         function openGate(region) {
     // 1. This triggers your commission link in the background
     const trackingLink = `https://tp.media/r?marker=${myMarker}&p=658&u=https://www.kiwi.com/en/search/results/current/${region}`;
