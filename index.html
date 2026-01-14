@@ -138,6 +138,17 @@
     createCanvas(windowWidth, windowHeight, WEBGL);
  perspective(PI/3.0, width/height, 0.1, 5000);
         }
+        function draw() {
+   background(0); 
+   ambientLight(150);
+   pointLight(255, 255, 255, 0, 0, 500);
+   push();
+   rotateY(frameCount * 0.005);
+   noStroke();
+   texture(earthImg);
+   sphere(200);
+   pop();
+}
         function openGate(region) {
     // 1. This triggers your commission link in the background
     const trackingLink = `https://tp.media/r?marker=${myMarker}&p=658&u=https://www.kiwi.com/en/search/results/current/${region}`;
