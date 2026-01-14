@@ -176,36 +176,7 @@
   sphere(200); 
   pop();
 }
-        function openGate(region) {
-    // 1. This triggers your commission link in the background
-    const trackingLink = `https://tp.media/r?marker=${myMarker}&p=658&u=https://www.kiwi.com/en/search/results/current/${region}`;
-    
-    // 2. This keeps your professional 'GDS INTERCEPT' visual card working
-    const data = travelMatrix[region];
-    const old = document.querySelector('.card'); if (old) old.remove();
-    // ... keep the rest of your card-building code below this ...
-    
-    // 3. Add this line so that clicking the card also opens your link
-    window.open(trackingLink, '_blank');
-
-            card.className = 'card';
-            card.innerHTML = `
-                <h3 style="color:#00ffff; margin:0; font-size:0.85rem;">GDS INTERCEPT: ${region}</h3>
-                
-                <label style="font-size:0.5rem; color:#00ffff; margin-top:10px;">DEPARTURE (SWIPE HUB OR TYPE):</label>
-                <div class="gateway-deck">${data.hubs.map(h => `<div class="city-tag" onclick="interceptPort('${h}', 'embark-port', 'embark-input')">${h}</div>`).join('')}</div>
-                <input type="text" id="embark-input" class="port-input" placeholder="MANUAL ENTRY...">
-                <div class="manifest-group"><div id="embark-port" class="port-display">GATEWAY: UNKNOWN</div></div>
-
-                <label style="font-size:0.5rem; color:#00ffff; margin-top:5px;">ARRIVAL (SWIPE HUB OR TYPE):</label>
-                <div class="gateway-deck">${data.hubs.map(h => `<div class="city-tag" onclick="interceptPort('${h}', 'disembark-port', 'disembark-input')">${h}</div>`).join('')}</div>
-                <input type="text" id="disembark-input" class="port-input" placeholder="MANUAL ENTRY...">
-                <div class="manifest-group"><div id="disembark-port" class="port-display">GATEWAY: UNKNOWN</div></div>
-
-                <div class="scroll-area">${data[currentMode].map(opt => `<div class="itinerary-line"><span>${opt.r}<br><b style="font-size:1.1rem; color:#fff;">${opt.p}</b></span><button class="validate-btn" onclick="alert('LOCKED')">LOCK</button></div>`).join('')}</div>
-               <button style="width:100%; margin-top:10px; padding:12px; color:#FFD700; border:1px solid #FFD700; background:none; font-weight:bold; cursor:pointer;" onclick="this.parentElement.remove()">CLOSE TERMINAL</button>`;
-        document.body.appendChild(card);
-        }
+       
 
  function interceptPort(city, displayId, inputId) {
     const gateway = (geoMap[city] && geoMap[city][currentMode]) || city.toUpperCase() + " HUB";
