@@ -145,9 +145,10 @@
 
         let currentMode = 'air'; let earthImg;
         function setMode(m, el) { currentMode = m; document.querySelectorAll('.icon-btn').forEach(b => b.classList.remove('active')); el.classList.add('active'); }
-        function preload() { 
-           earthImg = loadImage('https://raw.githubusercontent.com/mrdoob/three.js/master/examples/textures/planets/earth_atmos_2048.jpg');
-        }
+        function preload() {
+  earthImg = loadImage('https://raw.githubusercontent.com/mrdoob/three.js/master/examples/textures/planets/earth_atmos_2048.jpg', 
+    img => { img.crossOrigin = 'anonymous'; }); 
+}
        function setup() {
    let canvas = createCanvas(windowWidth, windowHeight, WEBGL);
    canvas.parent('globe-container'); // This is the secret key
@@ -155,7 +156,7 @@
 }
        function draw() {
   background(0);
-  if (!earthImg) return; // This stops the "black screen" while the image loads
+if (!earthImg) { sphere(200); return; }
   
   ambientLight(150);
   pointLight(255, 255, 255, 0, 0, 500);
