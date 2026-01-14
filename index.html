@@ -96,20 +96,15 @@
       <p style="color: #00ffff; font-size: 0.6rem; letter-spacing: 5px; margin: 0;">GLOBAL MOBILITY COMMAND</p>
     </div>
 
-  <div id="continent-hub" style="position: absolute; top: 12%; width: 100%; display: flex; justify-content: center; gap: 5px; flex-wrap: wrap; pointer-events: auto;">
+  <div id="continent-hub" style="position: absolute; top: 12%; width: 100%; display: flex; justify-content: center; gap: 5px; flex-wrap: wrap; pointer-events: auto; z-index: 1000;">
     <a href="https://www.klook.com/en-US/city/1-hong-kong-things-to-do/?aid=696305" target="_blank" class="continent-btn" style="text-decoration: none;">ASIA</a>
     <a href="https://www.klook.com/en-US/city/45-paris-things-to-do/?aid=696305" target="_blank" class="continent-btn" style="text-decoration: none;">EUROPE</a>
     <button class="continent-btn" onclick="window.open('https://www.klook.com/en-US/?aid=696305', '_blank')">AFRICA</button>
     <button class="continent-btn" onclick="window.open('https://www.klook.com/en-US/?aid=696305', '_blank')">NORTH AMERICA</button>
     <button class="continent-btn" onclick="window.open('https://www.klook.com/en-US/?aid=696305', '_blank')">SOUTH AMERICA</button>
 </div>
-    <div id="transport-menu" style="position: absolute; bottom: 8%; width: 100%; display: flex; justify-content: center; gap: 20px; pointer-events: auto;">
-      <div id="btn-air" class="icon-btn active" onclick="setMode('air', this)">✈️</div>
-      <div id="btn-sea" class="icon-btn" onclick="setMode('sea', this)">🚢</div>
-      <div id="btn-rail" class="icon-btn" onclick="setMode('rail', this)">🚆</div>
-      <div id="btn-sub" class="icon-btn" onclick="setMode('sub', this)">🚇</div>
-    </div>
-  </div>
+
+<div id="transport-menu" style="position: absolute; bottom: 8%; width: 100%; display: flex; justify-content: center; gap: 20px; pointer-events: auto;">
 <script>
     const myMarker = "696305"    
         const geoMap = {
