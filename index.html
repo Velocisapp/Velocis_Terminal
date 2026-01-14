@@ -150,7 +150,7 @@
     img => { img.crossOrigin = 'anonymous'; }); 
 }
        function setup() {
-   let canvas = createCanvas(windowWidth, windowHeight, WEBGL);
+   let canvas = createCanvas(windowWidth, windowHeight, WEBGL); canvas.style('display', 'block');
    canvas.parent('globe-container'); // This is the secret key
    perspective(PI/3.0, width/height, 0.1, 5000);
 }
