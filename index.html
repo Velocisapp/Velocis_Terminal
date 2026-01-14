@@ -153,16 +153,19 @@
    canvas.parent('globe-container'); // This is the secret key
    perspective(PI/3.0, width/height, 0.1, 5000);
 }
-        function draw() {
+       function draw() {
   background(0);
-   ambientLight(150);
-   pointLight(255, 255, 255, 0, 0, 500);
-   push();
-   rotateY(frameCount * 0.005);
-   noStroke();
-   texture(earthImg);
-   sphere(200);
-   pop();
+  if (!earthImg) return; // This stops the "black screen" while the image loads
+  
+  ambientLight(150);
+  pointLight(255, 255, 255, 0, 0, 500);
+  
+  push();
+  rotateY(frameCount * 0.005);
+  noStroke();
+  texture(earthImg); // This paints the map onto the globe
+  sphere(200);
+  pop();
 }
         function openGate(region) {
     // 1. This triggers your commission link in the background
