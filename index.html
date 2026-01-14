@@ -11,7 +11,7 @@
         
         /* PULSATING CONTINENT NAVIGATION */
         #continent-hub {
-            position: absolute; top: 25%; left: 50%; transform: translate(-50%, -50%);
+            position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
             display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; width: 95%; z-index: 100 !important;
         }
         .continent-btn {
@@ -20,7 +20,15 @@
             cursor: pointer; animation: pulseGlow 2.5s infinite ease-in-out;
         }
         @keyframes pulseGlow { 0% { box-shadow: 0 0 5px #00ffff; } 50% { box-shadow: 0 0 25px #00ffff; border-color: #fff; } 100% { box-shadow: 0 0 5px #00ffff; } }
-
+#transport-menu {
+    position: fixed;
+    top: 110px;        /* This moves it just below the VELOCIS™ logo */
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 15px;
+    z-index: 10000 !important;
+}
         /* THE CARD WITH SCROLL + TYPE + AUTO */
         .card { 
             position: absolute; top: 40%; left: 50%; transform: translate(-50%,-50%); 
