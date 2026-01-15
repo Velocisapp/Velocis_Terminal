@@ -51,14 +51,40 @@
     window.addEventListener('resize', resize); resize();
 
     const gates = [
-        { id: "B12", pos: 0.15, status: "BOARDING" }, { id: "B14", pos: 0.38, status: "BOARDING" },
-        { id: "A05", pos: 0.62, status: "ON TIME" }, { id: "A07", pos: 0.85, status: "FINAL CALL" }
+        { id: "B12", pos: 0.18, status: "BOARDING" }, 
+        { id: "B14", pos: 0.39, status: "BOARDING" },
+        { id: "A05", pos: 0.61, status: "ON TIME" }, 
+        { id: "A07", pos: 0.83, status: "FINAL CALL" }
     ];
 
-    const dots = Array.from({ length: 30 }, () => ({
+    const dots = Array.from({ length: 35 }, () => ({
         x: Math.random() * canvas.width, y: canvas.height + 20,
-        speed: 0.5 + Math.random(), targetGate: Math.floor(Math.random() * gates.length)
+        speed: 0.4 + Math.random() * 0.8, 
+        targetGate: Math.floor(Math.random() * gates.length)
     }));
+
+    // RESTORED: Original Sleek Arrow with Palpitation Math
+    function drawSleekArrow(x, y, color, dark) {
+        ctx.save(); ctx.translate(x, y);
+        const pulse = Math.abs(Math.sin(Date.now() / 300)) * 15;
+        ctx.shadowBlur = 10 + pulse; 
+        ctx.shadowColor = color;
+        
+        ctx.fillStyle = dark; 
+        ctx.beginPath();
+        ctx.moveTo(-35, 7); ctx.lineTo(0, -45); ctx.lineTo(35, 7); 
+        ctx.lineTo(17, 7); ctx.lineTo(17, 50); ctx.lineTo(-17, 50); 
+        ctx.lineTo(-17, 7); ctx.fill();
+
+        let faceGrd = ctx.createLinearGradient(0, -40, 0, 50);
+        faceGrd.addColorStop(0, '#FFFFFF'); faceGrd.addColorStop(0.3, color); faceGrd.addColorStop(1, dark);
+        ctx.fillStyle = faceGrd; 
+        ctx.beginPath();
+        ctx.moveTo(-35, 7); ctx.lineTo(0, -45); ctx.lineTo(35, 7); 
+        ctx.lineTo(17, 7); ctx.lineTo(17, 45); ctx.lineTo(-17, 45); 
+        ctx.lineTo(-17, 7); ctx.fill();
+        ctx.restore();
+    }
 
     function draw() {
         ctx.fillStyle = '#010406'; ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -71,25 +97,34 @@
         }
 
         gates.forEach((g) => {
-            const gx = canvas.width * g.pos; const gy = canvas.height * 0.7;
+            const gx = canvas.width * g.pos; 
+            // Moved the base height (gy) up to 65% to make room for arrows
+            const gy = canvas.height * 0.65; 
             let color = (g.status === "ON TIME") ? '#FFD700' : '#FF3131';
+            let dark = (g.status === "ON TIME") ? '#8B6B00' : '#8B0000';
             
-            // Pulsating Beams
-            const pGrd = ctx.createLinearGradient(gx-30, 0, gx+30, 0);
-            pGrd.addColorStop(0, 'transparent'); pGrd.addColorStop(0.5, 'rgba(0, 212, 255, 0.3)'); pGrd.addColorStop(1, 'transparent');
-            ctx.fillStyle = pGrd; ctx.fillRect(gx-30, 0, 60, gy);
+            // Pulsating Hub Beams
+            const pGrd = ctx.createLinearGradient(gx-35, 0, gx+35, 0);
+            pGrd.addColorStop(0, 'transparent'); pGrd.addColorStop(0.5, 'rgba(0, 212, 255, 0.35)'); pGrd.addColorStop(1, 'transparent');
+            ctx.fillStyle = pGrd; ctx.fillRect(gx-35, 0, 70, gy);
 
-            // Gate Text
-            ctx.textAlign = "center"; ctx.fillStyle = '#FFF'; ctx.font = '900 14px Courier New';
-            ctx.fillText("GATE", gx, gy - 120);
-            ctx.fillStyle = color; ctx.font = '900 32px Courier New';
-            ctx.fillText(g.id, gx, gy - 85);
+            // Re-anchored Original Arrow - Positioned lower than text
+            drawSleekArrow(gx, gy + 80 + Math.sin(Date.now()/400)*10, color, dark);
+
+            // MOVED UP: Gate Data (Higher Y values mean lower on screen, so we subtract)
+            ctx.textAlign = "center"; ctx.fillStyle = '#FFF'; ctx.font = '900 13px Courier New';
+            ctx.fillText("GATE", gx, gy - 60); // Shifted up from original
+            ctx.fillStyle = color; ctx.font = '900 42px Courier New';
+            ctx.fillText(g.id, gx, gy - 20); // Shifted up from original
+            ctx.font = 'bold 15px monospace';
+            ctx.fillText(g.status, gx, gy + 15);
         });
 
         dots.forEach(d => {
-            const gx = canvas.width * gates[d.targetGate].pos; const gy = canvas.height * 0.7;
-            d.x += (gx - d.x) * 0.01; d.y += (gy - d.y) * 0.01;
-            ctx.fillStyle = '#00FFFF'; ctx.beginPath(); ctx.arc(d.x, d.y, 3, 0, Math.PI*2); ctx.fill();
+            const gx = canvas.width * gates[d.targetGate].pos; const gy = canvas.height * 0.65;
+            d.x += (gx - d.x) * 0.015; d.y -= d.speed;
+            if (d.y < gy) d.y = canvas.height + 20;
+            ctx.fillStyle = '#00FFFF'; ctx.beginPath(); ctx.arc(d.x, d.y, 2.5, 0, Math.PI*2); ctx.fill();
         });
         requestAnimationFrame(draw);
     }
