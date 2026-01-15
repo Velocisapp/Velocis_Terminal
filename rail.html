@@ -33,7 +33,6 @@
     function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
     window.addEventListener('resize', resize); resize();
 
-    // CUSTOMIZED FOR RAIL
     const gates = [
         { id: "PLAT 1", pos: 0.18, status: "ON TIME" }, 
         { id: "PLAT 4", pos: 0.39, status: "BOARDING" },
@@ -42,22 +41,36 @@
     ];
 
     const dots = Array.from({ length: 35 }, () => ({
-        x: Math.random() * canvas.width, y: canvas.height + 20, speed: 0.4 + Math.random() * 0.8, targetGate: Math.floor(Math.random() * gates.length)
+        x: Math.random() * canvas.width, y: canvas.height + 20,
+        speed: 0.4 + Math.random() * 0.8, 
+        targetGate: Math.floor(Math.random() * gates.length)
     }));
 
     function drawSleekArrow(x, y, color, dark) {
         ctx.save(); ctx.translate(x, y);
         const pulse = Math.abs(Math.sin(Date.now() / 300)) * 15;
-        ctx.shadowBlur = 10 + pulse; ctx.shadowColor = color;
-        ctx.fillStyle = dark; ctx.beginPath();
-        ctx.moveTo(-35, 7); ctx.lineTo(0, -45); ctx.lineTo(35, 7); ctx.lineTo(17, 7); ctx.lineTo(17, 50); ctx.lineTo(-17, 50); ctx.lineTo(-17, 7); ctx.fill();
+        ctx.shadowBlur = 10 + pulse; 
+        ctx.shadowColor = color;
+        ctx.fillStyle = dark; 
+        ctx.beginPath();
+        ctx.moveTo(-35, 7); ctx.lineTo(0, -45); ctx.lineTo(35, 7); 
+        ctx.lineTo(17, 7); ctx.lineTo(17, 50); ctx.lineTo(-17, 50); 
+        ctx.lineTo(-17, 7); ctx.fill();
+        let faceGrd = ctx.createLinearGradient(0, -40, 0, 50);
+        faceGrd.addColorStop(0, '#FFFFFF'); faceGrd.addColorStop(0.3, color); faceGrd.addColorStop(1, dark);
+        ctx.fillStyle = faceGrd; 
+        ctx.beginPath();
+        ctx.moveTo(-35, 7); ctx.lineTo(0, -45); ctx.lineTo(35, 7); 
+        ctx.lineTo(17, 7); ctx.lineTo(17, 45); ctx.lineTo(-17, 45); 
+        ctx.lineTo(-17, 7); ctx.fill();
         ctx.restore();
     }
 
     function draw() {
         ctx.fillStyle = '#010406'; ctx.fillRect(0, 0, canvas.width, canvas.height);
         gates.forEach((g) => {
-            const gx = canvas.width * g.pos; const gy = canvas.height * 0.65;
+            const gx = canvas.width * g.pos; 
+            const gy = canvas.height * 0.65; 
             let color = (g.status === "ON TIME") ? '#FFD700' : '#FF3131';
             let dark = (g.status === "ON TIME") ? '#8B6B00' : '#8B0000';
             const pGrd = ctx.createLinearGradient(gx-35, 0, gx+35, 0);
