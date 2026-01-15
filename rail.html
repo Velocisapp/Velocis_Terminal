@@ -60,13 +60,28 @@
     }));
 
     function drawSleekArrow(x, y, color, dark) {
-        ctx.save(); ctx.translate(x, y);
-        const pulse = Math.abs(Math.sin(Date.now() / 300)) * 15;
-        ctx.shadowBlur = 10 + pulse; ctx.shadowColor = color;
-        ctx.fillStyle = dark; ctx.beginPath();
-        ctx.moveTo(-25, 5); ctx.lineTo(0, -35); ctx.lineTo(25, 5); ctx.lineTo(12, 5); ctx.lineTo(12, 40); ctx.lineTo(-12, 40); ctx.lineTo(-12, 5); ctx.fill();
-        ctx.restore();
-    }
+    ctx.save(); ctx.translate(x, y);
+    
+    // INCREASED GLOW: Doubled the pulse range for maximum brightness
+    const pulse = Math.abs(Math.sin(Date.now() / 300)) * 30;
+    ctx.shadowBlur = 20 + pulse; 
+    ctx.shadowColor = color;
+    
+    // BRIGHTER FILL: Swapped 'dark' for 'color' to prevent the dark center
+    ctx.fillStyle = color; 
+    ctx.beginPath();
+    ctx.moveTo(-25, 5); ctx.lineTo(0, -35); ctx.lineTo(25, 5); 
+    ctx.lineTo(12, 5); ctx.lineTo(12, 40); ctx.lineTo(-12, 40); 
+    ctx.lineTo(-12, 5); ctx.fill();
+
+    // GLOSS LAYER: Added a white overlay to make the arrow look neon
+    ctx.globalAlpha = 0.4;
+    ctx.fillStyle = '#FFFFFF';
+    ctx.beginPath();
+    ctx.moveTo(-25, 5); ctx.lineTo(0, -35); ctx.lineTo(25, 5); ctx.fill();
+    
+    ctx.restore();
+}
 
     function draw() {
         ctx.fillStyle = '#010406'; ctx.fillRect(0, 0, canvas.width, canvas.height);
