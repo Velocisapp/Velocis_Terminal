@@ -1,0 +1,14 @@
+{
+  "name": "VELOCIS Terminal",
+  "short_name": "VELOCIS",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#010406",
+  "theme_color": "#FFD700",
+  "icons": [
+    {
+      "src": "https://velocisapp.github.io/Velocis_Terminal/logo.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
