@@ -22,7 +22,11 @@
             background: rgba(60, 0, 0, 0.95); border-top: 4px solid #FF3131; 
             display: flex; align-items: center; overflow: hidden;
         }
-    </style>
+   @keyframes alertBoxPulse { 
+    0% { border-width: 2px; box-shadow: 0 0 5px #FF3131; transform: scale(1); } 
+    50% { border-width: 6px; box-shadow: 0 0 25px #FF3131; transform: scale(1.02); } 
+    100% { border-width: 2px; box-shadow: 0 0 5px #FF3131; transform: scale(1); } 
+} </style>
 </head>
 <body>
     <canvas id="engine"></canvas>
@@ -85,7 +89,19 @@
 
     function draw() {
         ctx.fillStyle = '#010406'; ctx.fillRect(0, 0, canvas.width, canvas.height);
-        
+        const hasFinalCall = gates.some(g => g.status === "FINAL CALL");
+const hb = document.getElementById('header-box');
+const clk = document.getElementById('clock');
+
+if (hasFinalCall) {
+    hb.style.animation = 'alertBoxPulse 1s infinite ease-in-out';
+    hb.style.borderColor = '#FF3131';
+    clk.style.color = '#FF3131';
+} else {
+    hb.style.animation = 'none';
+    hb.style.borderColor = '#FFD700';
+    clk.style.color = '#FFD700';
+}
         gates.forEach((g) => {
             const gx = canvas.width * g.pos; const gy = canvas.height * 0.68; 
             let color = (g.status === "ON TIME") ? '#FFD700' : '#FF3131';
