@@ -2,32 +2,46 @@
 <html>
 <head>
     <style>
-        body { margin: 0; background: #010406; overflow: hidden; font-family: 'Courier New', monospace; }
-        canvas { display: block; }
-        #ui { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; }
-        @keyframes marquee { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
-        /* INCREASED PULSE SIZE & GLOW */
-        @keyframes alertBoxPulse { 
-            0% { border-width: 2px; box-shadow: 0 0 5px #FF3131; transform: scale(1); } 
-            50% { border-width: 8px; box-shadow: 0 0 30px #FF3131; transform: scale(1.03); } 
-            100% { border-width: 2px; box-shadow: 0 0 5px #FF3131; transform: scale(1); } 
-        }
-    </style>
-</head>
-<body>
-    <canvas id="engine"></canvas>
-    <div id="ui">
-        <div id="header-box" style="position: absolute; top: 40px; left: 40px; border: 2px solid #FFD700; padding: 25px; background: rgba(0,20,20,0.95); width: 500px; transition: all 0.5s ease; transform-origin: top left;">
-            <div id="brand-title" style="color: #FFD700; font-size: 32px; font-weight: 900;">VELOCIS™ SECURITY HUB</div>
-            <div id="header-line" style="height: 3px; background: #FFD700; margin: 15px 0;"></div>
-            <div id="clock" style="color: #FFD700; font-size: 40px; font-weight: bold;">TIME: 11:51:00</div>
-        </div>
-        <div style="position: absolute; bottom: 0; width: 100%; height: 120px; background: rgba(60, 0, 0, 0.95); border-top: 6px solid #FF3131; display: flex; align-items: center; overflow: hidden;">
-            <div id="ticker-text" style="white-space: nowrap; color: #FF3131; font-weight: 900; font-size: 55px; animation: marquee 15s linear infinite;">
-                TERMINAL 3 | SECURITY STATUS: ALPHA | SYSTEM ACTIVE | VELOCIS™ HUB
-            </div>
+    body { margin: 0; background: #010406; overflow: hidden; font-family: 'Courier New', monospace; width: 100vw; height: 100vh; }
+    canvas { display: block; width: 100%; height: 100%; }
+    #ui { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; }
+    
+    /* Optimized for Mobile */
+    #header-box { 
+        position: absolute; 
+        top: 20px; 
+        left: 5%; 
+        border: 2px solid #FFD700; 
+        padding: 15px; 
+        background: rgba(0,20,20,0.95); 
+        width: 85%; /* Fits within mobile screen width */
+        box-sizing: border-box;
+    }
+    
+    #brand-title { color: #FFD700; font-size: 18px; font-weight: 900; }
+    #clock { color: #FFD700; font-size: 24px; font-weight: bold; }
+    
+    @keyframes marquee { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
+    @keyframes alertBoxPulse { 
+        0% { border-width: 2px; box-shadow: 0 0 5px #FF3131; } 
+        50% { border-width: 5px; box-shadow: 0 0 20px #FF3131; } 
+        100% { border-width: 2px; box-shadow: 0 0 5px #FF3131; } 
+    }
+</style>
+
+<div id="ui">
+    <div id="header-box">
+        <div id="brand-title">VELOCIS™ SECURITY HUB</div>
+        <div style="height: 2px; background: #FFD700; margin: 10px 0;"></div>
+        <div id="clock">TIME: --:--:--</div>
+    </div>
+    
+    <div style="position: absolute; bottom: 0; width: 100%; height: 60px; background: rgba(60, 0, 0, 0.95); border-top: 4px solid #FF3131; display: flex; align-items: center; overflow: hidden;">
+        <div id="ticker-text" style="white-space: nowrap; color: #FF3131; font-weight: 900; font-size: 25px; animation: marquee 10s linear infinite;">
+            TERMINAL 3 | SECURITY STATUS: ALPHA | VELOCIS™ HUB
         </div>
     </div>
+</div>
 
 <script>
     const canvas = document.getElementById('engine');
