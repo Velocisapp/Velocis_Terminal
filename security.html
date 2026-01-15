@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VELOCIS™ Security Hub</title>
+    <style>
+        body { margin: 0; background: #000; color: #fff; font-family: monospace; overflow-x: hidden; }
+        .header { border: 2px solid #ff4444; margin: 20px; padding: 10px; box-shadow: 0 0 15px #ff4444; }
+        .gate-container { display: flex; justify-content: space-around; margin-top: 50px; text-align: center; }
+        .gate { font-size: 24px; font-weight: bold; }
+        .status { font-size: 10px; margin-top: 5px; text-transform: uppercase; }
+        .boarding { color: #ff4444; }
+        .on-time { color: #ffeb3b; }
+        .beam { height: 400px; width: 40px; background: linear-gradient(to top, transparent, #00d4ff, transparent); margin: 0 auto; opacity: 0.5; }
+        .logs { position: absolute; bottom: 50px; right: 20px; border: 1px solid #ffeb3b; padding: 10px; width: 250px; }
+        .log-entry { border-bottom: 1px solid #ffeb3b; padding: 5px; font-size: 10px; display: flex; justify-content: space-between; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div>VELOCIS™ SECURITY HUB</div>
+        <div id="clock">TIME: 09:12:36</div>
+    </div>
+
+    <div class="gate-container">
+        <div><div class="gate boarding">B12</div><div class="status boarding">Boarding</div><div class="beam"></div></div>
+        <div><div class="gate boarding">B14</div><div class="status boarding">Boarding</div><div class="beam"></div></div>
+        <div><div class="gate on-time">A05</div><div class="status on-time">On Time</div><div class="beam"></div></div>
+        <div><div class="gate boarding">A07</div><div class="status boarding">Final Call</div><div class="beam"></div></div>
+        <div><div class="gate on-time">C01</div><div class="status on-time">On Time</div><div class="beam"></div></div>
+        <div><div class="gate boarding">C03</div><div class="status boarding">Boarding</div><div class="beam"></div></div>
+    </div>
+
+    <div class="logs">
+        <div class="log-entry">FLIGHT: EK-SIN</div>
+        <div class="log-entry">FLIGHT: EK-JFK</div>
+        <div class="log-entry">FLIGHT: EK-LHR</div>
+        <div class="log-entry">FLIGHT: EK-SFO</div>
+        <div class="log-entry">FLIGHT: EK-CDG</div>
+    </div>
+</body>
+</html>
