@@ -160,21 +160,16 @@
 </div>
 <script>
    function updateIntel(mode) {
-    // 1. Force the Gold Window to appear instantly
-    document.getElementById('carousel-intel').style.display = 'block';
-    
     const hubText = document.getElementById('guide-text');
-    const mLabel = document.getElementById('intel-mode');
-    const mNum = document.getElementById('intel-number');
 
     if (mode === 'AIR') {
         hubText.innerHTML = "<strong>PARIS (107):</strong> GATE 12B - BOARDING 12:45";
-        mLabel.innerText = "LUGGAGE CAROUSEL"; 
-        mNum.innerText = "14";
     } else if (mode === 'SEA') {
         hubText.innerHTML = "<strong>PARIS (107):</strong> PORT DOCK 4 - GATES OPENING";
-        mLabel.innerText = "BOARDING DOCK"; 
-        mNum.innerText = "04";
+    } else if (mode === 'RAIL') {
+        hubText.innerHTML = "<strong>PARIS (107):</strong> GARE DU NORD - PLATFORM 07";
+    } else if (mode === 'SUBWAY') {
+        hubText.innerHTML = "<strong>PARIS (107):</strong> CHATELET EXIT - GATE B2";
     }
 }
     const myMarker = "696305"    
