@@ -117,7 +117,7 @@
       <h1 style="margin: 0; color: #FFD700; text-shadow: 0 0 10px #FFD700;">VELOCIS™</h1>
       <p style="color: #00ffff; font-size: 0.6rem; letter-spacing: 5px; margin: 0;">GLOBAL MOBILITY COMMAND</p>
     </div>
-<div id="beta-invite" style="position: absolute; top: 12%; width: 100%; text-align: center; z-index: 1001; color: white; font-family: sans-serif;">
+<div id="beta-invite" style="position: absolute; top: 12%; width: 100%; text-align: center; z-index: 1001; color: white; font-family: sans-serif; pointer-events: auto;">
     <h1 style="margin: 0; font-size: 1.2rem; letter-spacing: 2px;">VELOCIS™ BETA</h1>
     <p style="margin: 5px 0; font-size: 0.8rem; opacity: 0.8;">Testing Journey Timeline: Paris (107) & HK (2)</p>
     <button onclick="showInstall()" style="background: white; color: black; border: none; padding: 8px 15px; font-weight: bold; border-radius: 5px; cursor: pointer;">Install VELOCIS (Free)</button>
@@ -216,8 +216,8 @@ function openGate(region) {
     document.getElementById(inputId).value = city;
  }
 function showInstall() {
-    document.getElementById('install-guide').style.display = 'block';
-    document.getElementById('ios-prompt').style.display = 'block';
+    document.getElementById('install-guide').style.setProperty('display', 'block', 'important');
+    document.getElementById('ios-prompt').style.setProperty('display', 'block', 'important');
 }
  </script>
      <section id="travel-guides" style="position: absolute; top: 62%; left: 50%; transform: translate(-50%, -50%); width: 90%; background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(10px); color: #fff; padding: 15px; border-radius: 15px; border: 1px solid rgba(0, 212, 255, 0.3); font-family: sans-serif; font-size: 11px; z-index: 5; text-align: center; box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.8);">
