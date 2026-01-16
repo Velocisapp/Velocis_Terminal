@@ -237,9 +237,9 @@ function openGate(region) {
 }
  function updateIntel(mode) {
     const intelBox = document.getElementById('carousel-intel');
-    const label = intelBox.querySelector('div div:nth-child(1)');
-    const number = intelBox.querySelector('div div:nth-child(2)');
-    const footer = intelBox.querySelector('div div:nth-child(3)');
+    const label = intelBox.querySelector('div > div:nth-child(1)');
+const number = intelBox.querySelector('div > div:nth-child(2)');
+const footer = intelBox.querySelector('div > div:nth-child(3)');
     const hubGuide = document.getElementById('travel-guides'); // The bottom box
 
     intelBox.style.display = 'block';
