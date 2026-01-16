@@ -49,7 +49,6 @@
 </head>
 
 <body style="margin: 0; background: #000; overflow: hidden;">
-
     <div id="master-ui" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 99999; pointer-events: none;">
         
         <div id="ios-prompt" style="display:block; position:fixed; bottom: 10px; left:50%; transform:translateX(-50%); width: 100%; text-align: center; z-index: 2000; pointer-events: none;">
@@ -70,7 +69,7 @@
                     <span style="color: #FFD700; font-size: 10px; font-weight: 900; letter-spacing: 2px;">ARRIVAL HUB: PARIS (107)</span>
                     <span onclick="document.getElementById('carousel-intel').style.display='none'" style="color: #FFD700; cursor: pointer; font-weight: bold; font-size: 20px; line-height: 1;">×</span>
                 </div>
-                <div style="text-align: center;">
+                <div id="intel-content" style="text-align: center;">
                     <div style="color: #FFF; font-size: 12px; opacity: 0.9;">LUGGAGE CAROUSEL</div>
                     <div style="color: #FFD700; font-size: 52px; font-weight: 900; text-shadow: 0 0 25px #FFD700; display: inline-block; animation: palpitates 1.5s ease-in-out infinite;">14</div>
                     <div style="color: #FFF; font-size: 11px; margin-top: 5px; font-weight: bold;">ESTIMATED BAG DROP: <span style="color: #FFD700;">4 MIN</span></div>
@@ -86,37 +85,17 @@
         </div>
     </div>
 
-    <div id="continent-hub" style="position: absolute; top: 42%; width: 100%; display: flex; justify-content: center; gap: 5px; flex-wrap: wrap; pointer-events: auto; z-index: 1000;">
-        <button class="continent-btn" onclick="openGate('ASIA')">ASIA</button>
-        <button class="continent-btn" onclick="openGate('EUROPE')">EUROPE</button>
-        <button class="continent-btn" onclick="window.open('https://www.klook.com/en-US/?aid=696305', '_blank')">AFRICA</button>
-    </div>
-
     <section id="travel-guides" style="position: absolute; top: 62%; left: 50%; transform: translate(-50%, -50%); width: 90%; background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(10px); color: #fff; padding: 15px; border-radius: 15px; border: 1px solid rgba(0, 212, 255, 0.3); font-family: sans-serif; font-size: 11px; z-index: 5; text-align: center;">
         <h3 style="color: #00d4ff; font-size: 13px; margin: 0 0 8px 0; text-transform: uppercase;">Hub Intelligence: 107 & 2</h3>
-        <p><strong>PARIS (107):</strong> RER B is the 2026 speed-standard from CDG.</p>
-        <p><strong>HONG KONG (2):</strong> Octopus Card is essential for MTR transit.</p>
+        <p>PARIS (107): RER B is the 2026 speed-standard from CDG.</p>
+        <p>HONG KONG (2): Octopus Card is essential for MTR transit.</p>
     </section>
 
     <script>
-        // GLOBE ENGINE
-        let earthImg;
-        function preload() { earthImg = loadImage('https://raw.githubusercontent.com/mrdoob/three.js/master/examples/textures/planets/earth_atmos_2048.jpg'); }
-        function setup() { let canvas = createCanvas(windowWidth, windowHeight, WEBGL); canvas.style('position', 'fixed'); canvas.style('top', '0'); canvas.style('z-index', '1'); }
-        function draw() { background(0); if (!earthImg) return; ambientLight(210); rotateY(frameCount * 0.005); texture(earthImg); sphere(200); }
-
-        // NAVIGATION
-        function openGate(region) {
-            let url = (region === 'EUROPE') ? '107-paris' : '2-hong-kong';
-            window.open('https://www.klook.com/en-US/city/' + url + '-things-to-do/?aid=696305', '_blank');
-        }
-
-        // SYNCHRONIZED INTELLIGENCE LOGIC
+        // TARGETED INTELLIGENCE LOGIC
         function updateIntel(mode) {
             const intelBox = document.getElementById('carousel-intel');
-            const label = intelBox.querySelector('div div div:nth-child(1)');
-            const number = intelBox.querySelector('div div div:nth-child(2)');
-            const footer = intelBox.querySelector('div div div:nth-child(3)');
+            const content = document.getElementById('intel-content');
             const hubGuide = document.getElementById('travel-guides');
 
             intelBox.style.display = 'block';
@@ -124,30 +103,29 @@
 
             if (mode === 'AIR') {
                 document.getElementById('btn-air').classList.add('active');
-                label.innerText = "LUGGAGE CAROUSEL";
-                number.innerText = "14";
-                footer.innerHTML = "ESTIMATED BAG DROP: <span style='color: #FFD700;'>4 MIN</span>";
-                hubGuide.innerHTML = `<h3 style="color: #00d4ff;">AIR INTELLIGENCE: 107 & 2</h3><p>CDG: RER B is the 2026 speed-standard.</p>`;
+                content.innerHTML = `<div style="color:#FFF;font-size:12px;opacity:0.9;">LUGGAGE CAROUSEL</div>
+                                     <div style="color:#FFD700;font-size:52px;font-weight:900;animation:palpitates 1.5s infinite;">14</div>
+                                     <div style="color:#FFF;font-size:11px;font-weight:bold;">ESTIMATED BAG DROP: <span style="color:#FFD700;">4 MIN</span></div>`;
+                hubGuide.innerHTML = `<h3 style="color:#00d4ff;">AIR INTELLIGENCE: 107 & 2</h3><p>CDG: RER B is the 2026 speed-standard.</p>`;
             } else if (mode === 'SEA') {
                 document.getElementById('btn-sea').classList.add('active');
-                label.innerText = "BOARDING DOCK";
-                number.innerText = "04";
-                footer.innerHTML = "STATUS: <span style='color: #FFD700;'>GATES OPENING</span>";
-                hubGuide.innerHTML = `<h3 style="color: #00d4ff;">SEA INTELLIGENCE: 107 & 2</h3><p>HK: Star Ferry remains high-efficiency.</p>`;
+                content.innerHTML = `<div style="color:#FFF;font-size:12px;opacity:0.9;">BOARDING DOCK</div>
+                                     <div style="color:#FFD700;font-size:52px;font-weight:900;animation:palpitates 1.5s infinite;">04</div>
+                                     <div style="color:#FFF;font-size:11px;font-weight:bold;">STATUS: <span style="color:#FFD700;">GATES OPENING</span></div>`;
+                hubGuide.innerHTML = `<h3 style="color:#00d4ff;">SEA INTELLIGENCE: 107 & 2</h3><p>HK: Star Ferry remains high-efficiency.</p>`;
             } else if (mode === 'RAIL') {
                 document.getElementById('btn-rail').classList.add('active');
-                label.innerText = "PLATFORM";
-                number.innerText = "07";
-                footer.innerHTML = "COACH LOCATION: <span style='color: #FFD700;'>CENTER</span>";
-                hubGuide.innerHTML = `<h3 style="color: #00d4ff;">RAIL INTELLIGENCE: 107 & 2</h3><p>PARIS: Gare du Nord check-in: 60 min.</p>`;
+                content.innerHTML = `<div style="color:#FFF;font-size:12px;opacity:0.9;">PLATFORM</div>
+                                     <div style="color:#FFD700;font-size:52px;font-weight:900;animation:palpitates 1.5s infinite;">07</div>
+                                     <div style="color:#FFF;font-size:11px;font-weight:bold;">COACH LOCATION: <span style="color:#FFD700;">CENTER</span></div>`;
+                hubGuide.innerHTML = `<h3 style="color:#00d4ff;">RAIL INTELLIGENCE: 107 & 2</h3><p>PARIS: Gare du Nord check-in: 60 min.</p>`;
             } else if (mode === 'SUBWAY') {
                 document.getElementById('btn-sub').classList.add('active');
-                label.innerText = "EXIT GATE";
-                number.innerText = "B2";
-                footer.innerHTML = "NEXT TRAIN: <span style='color: #FFD700;'>ARRIVING</span>";
-                hubGuide.innerHTML = `<h3 style="color: #00d4ff;">SUBWAY INTELLIGENCE: 107 & 2</h3><p>MTR frequency is 1.2 mins peak.</p>`;
+                content.innerHTML = `<div style="color:#FFF;font-size:12px;opacity:0.9;">EXIT GATE</div>
+                                     <div style="color:#FFD700;font-size:52px;font-weight:900;animation:palpitates 1.5s infinite;">B2</div>
+                                     <div style="color:#FFF;font-size:11px;font-weight:bold;">NEXT TRAIN: <span style="color:#FFD700;">ARRIVING</span></div>`;
+                hubGuide.innerHTML = `<h3 style="color:#00d4ff;">SUBWAY INTELLIGENCE: 107 & 2</h3><p>MTR frequency is 1.2 mins peak.</p>`;
             }
         }
     </script>
 </body>
-</html>
