@@ -121,12 +121,8 @@
     <button style="background: white; color: black; border: none; padding: 8px 15px; font-weight: bold; border-radius: 5px; cursor: pointer;">JOIN 2026 GLOBAL MOBILITY BETA</button>
 </div>
 
-<div id="carousel-intel" style="position: absolute; top: 22%; width: 90%; left: 5%; background: rgba(0,255,255,0.1); border: 1px solid #00FFFF; border-radius: 12px; padding: 15px; backdrop-filter: blur(10px); z-index: 1500; display: block;">
-    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-        <span style="color: #00FFFF; font-size: 10px; font-weight: 900; letter-spacing: 2px;">ARRIVAL HUB: PARIS (107)</span>
-        <span style="background: #00FFFF; color: #000; font-size: 10px; padding: 2px 6px; border-radius: 4px; font-weight: bold;">LIVE</span>
-    </div>
-    <div style="text-align: center;">
+
+ <div style="text-align: center;">
         <div style="color: #FFF; font-size: 12px; opacity: 0.8;">LUGGAGE CAROUSEL</div>
         <div style="color: #00FFFF; font-size: 42px; font-weight: 900; text-shadow: 0 0 20px #00FFFF;">14</div>
         <div style="color: #FFF; font-size: 10px; margin-top: 5px;">ESTIMATED BAG DROP: <span style="color: #00FFFF;">4 MIN</span></div>
@@ -141,8 +137,8 @@
 </div>
 
 <div id="transport-menu" style="position: absolute; bottom: 8%; width: 100%; display: flex; justify-content: center; gap: 20px; pointer-events: auto;">
-   <div id="btn-air" class="icon-btn active" onclick="location.href='security.html'">✈️</div>
-    <div id="btn-sea" class="icon-btn" onclick="location.href='sea.html'">🚢</div>
+   <div id="btn-air" class="icon-btn active" onclick="updateIntel('AIR')">✈️</div>
+<div id="btn-sea" class="icon-btn" onclick="updateIntel('SEA')">🚢</div>
     <div id="btn-rail" class="icon-btn" onclick="location.href='rail.html'">🚆</div>
     <div id="btn-sub" class="icon-btn" onclick="location.href='subway.html'">🚇</div>
 </div>
