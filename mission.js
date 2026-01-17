@@ -1,4 +1,3 @@
-// VELOCIS™ Mission Intelligence - Isolated Logic
 function triggerArrival(carouselNum) {
     const alertBanner = document.getElementById('arrival-alert');
     const baggageBox = document.getElementById('carousel-display');
@@ -10,9 +9,13 @@ function triggerArrival(carouselNum) {
         alertBanner.style.display = 'block';
         baggageBox.style.display = 'block';
 
-        // Direct scroll to the data without touching other elements
         setTimeout(() => {
-            scrollWindow.scrollTo({ top: scrollWindow.scrollHeight, behavior: 'smooth' });
+            if (scrollWindow) {
+                scrollWindow.scrollTo({ top: scrollWindow.scrollHeight, behavior: 'smooth' });
+            }
         }, 500);
     }
 }
+
+// TEST TRIGGER
+setTimeout(() => { triggerArrival('9'); }, 3000);
