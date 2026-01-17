@@ -5,32 +5,27 @@ function triggerArrival(carouselNum, city) {
     const baggageText = document.getElementById('baggage-text');
     const booking = document.getElementById('booking-link');
     const trip = document.getElementById('trip-link');
+    // ADD THIS LINE: It finds the button inside the baggage box
+    const baggageTrip = document.getElementById('baggage-trip-link');
 
-    // 1. Marketplace Intelligence Swap
     if (city === 'HK') {
-        booking.href = "https://www.booking.com/searchresults.html?ss=Hong+Kong";
         booking.innerText = "View Hong Kong Hotels (Booking.com)";
-        trip.href = "https://www.trip.com/flights/list?searchtype=1&acity=hkg";
         trip.innerText = "Find Hong Kong Flights (Trip.com)";
+        // UPDATE THE THIRD BUTTON
+        if (baggageTrip) { baggageTrip.innerText = "Find Hong Kong Flights (Trip.com)"; }
     } else {
-        // Defaults to Paris for Europe
-        booking.href = "https://www.booking.com/searchresults.html?ss=Paris";
         booking.innerText = "View Paris Hotels (Booking.com)";
-        trip.href = "https://www.trip.com/flights/list?searchtype=1&acity=par";
         trip.innerText = "Find Paris Flights (Trip.com)";
+        // RESET THE THIRD BUTTON
+        if (baggageTrip) { baggageTrip.innerText = "Find Paris Flights (Trip.com)"; }
     }
 
-    // 2. Baggage Intelligence Reveal (Works for both HK and Paris)
     if (baggageText && alertBanner && baggageBox) {
         baggageText.innerText = "CAROUSEL " + carouselNum;
         alertBanner.style.display = 'block';
         baggageBox.style.display = 'block';
-
-        // 3. Zero-Input Auto-Scroll
         setTimeout(() => {
-            if (scrollWindow) {
-                scrollWindow.scrollTo({ top: scrollWindow.scrollHeight, behavior: 'smooth' });
-            }
+            if (scrollWindow) { scrollWindow.scrollTo({ top: scrollWindow.scrollHeight, behavior: 'smooth' }); }
         }, 500);
     }
 }
