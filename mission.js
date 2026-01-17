@@ -1,3 +1,8 @@
+/**
+ * VELOCIS™ MISSION CONTROL
+ * Core intelligence for automated arrival missions.
+ */
+
 function triggerArrival(carouselNum, city) {
     const alertBanner = document.getElementById('arrival-alert');
     const baggageBox = document.getElementById('carousel-display');
@@ -7,7 +12,7 @@ function triggerArrival(carouselNum, city) {
     const trip = document.getElementById('trip-link');
     const baggageTrip = document.getElementById('baggage-trip-link');
 
-    // 1. Marketplace Intelligence Swap (Localized for HK or Paris)
+    // 1. Marketplace Intelligence Swap
     if (city === 'HK') {
         if (booking) {
             booking.href = "https://www.booking.com/searchresults.html?ss=Hong+Kong";
@@ -43,7 +48,7 @@ function triggerArrival(carouselNum, city) {
         alertBanner.style.display = 'block';
         baggageBox.style.display = 'block';
 
-        // Zero-Input Auto-Scroll to focus on arrival data
+        // Zero-Input Auto-Scroll
         setTimeout(() => {
             if (scrollWindow) {
                 scrollWindow.scrollTo({ top: scrollWindow.scrollHeight, behavior: 'smooth' });
@@ -52,3 +57,36 @@ function triggerArrival(carouselNum, city) {
     }
 }
 
+// 3. GPS SILENT LISTENER CONFIGURATION
+// These coordinates must match the locations of our strategic ports
+const GLOBAL_PORTS = [
+    { name: 'Paris CDG', lat: 49.0097, lon: 2.5479, carousel: '12', city: 'Paris' },
+    { name: 'Hong Kong HKG', lat: 22.3080, lon: 113.9185, carousel: '2', city: 'HK' }
+];
+
+/**
+ * Automatically identifies the user's location and triggers the mission.
+ */
+function activateLocationIntelligence() {
+    if ("geolocation" in navigator) {
+        navigator.geolocation.getCurrentPosition((position) => {
+            const userLat = position.coords.latitude;
+            const userLon = position.coords.longitude;
+
+            GLOBAL_PORTS.forEach(port => {
+                // Calculate if user is within the geofence (~3km)
+                const distance = Math.sqrt(Math.pow(userLat - port.lat, 2) + Math.pow(userLon - port.lon, 2));
+                
+                if (distance < 0.03) {
+                    console.log("VELOCIS Match Identified: " + port.name);
+                    triggerArrival(port.carousel, port.city);
+                }
+            });
+        }, (error) => {
+            console.warn("Location permission denied. Running in manual mode.");
+        });
+    }
+}
+
+// 4. AUTO-TRIGGER ON LOAD
+window.onload = activateLocationIntelligence;
