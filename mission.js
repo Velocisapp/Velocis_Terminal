@@ -17,5 +17,4 @@ function triggerArrival(carouselNum) {
     }
 }
 
-// TEST TRIGGER
-setTimeout(() => { triggerArrival('9'); }, 3000);
+
